@@ -8,7 +8,7 @@
  * 
  * 
  */
-$dir =   dirname(__FILE__) .'/functions';  ///Folder functions : change the name of the folder here 
+$array_folder = array('functions','framework');
 function getSubDirectories($dir)
 {
     $subDir = array();
@@ -20,12 +20,16 @@ function getSubDirectories($dir)
     // Return list of sub directories
     return $subDir;
 }
-foreach(getSubDirectories($dir) as $folder){ 
-    $files = glob($folder."/*.php"); // return array files
-    foreach($files as $phpFile){   
-        require_once("$phpFile"); 
+foreach ($array_folder as $folder):
+    $dir =   dirname(__FILE__) .'/'.$folder; 
+    foreach(getSubDirectories($dir) as $folder){ 
+        $files = glob($folder."/*.php"); // return array files
+        foreach($files as $phpFile){   
+            require_once("$phpFile"); 
+        }
     }
-}
+endforeach;
+
 
 /***
  * 
